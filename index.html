@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SWMG Beyblade Tournaments</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            text-align: center; 
+            background: #111; 
+            color: #eee; 
+            transition: background 0.5s, color 0.5s; 
+            margin: 0; 
+            overflow: auto; /* Allow scrolling */
+            height: 100%;
+        }
+        nav { 
+            background: #222; 
+            padding: 15px; 
+            display: flex; 
+            justify-content: center; 
+            gap: 20px; 
+        }
+        nav a { 
+            color: #ffcc00; 
+            text-decoration: none; 
+            font-size: 20px; 
+            font-weight: bold; 
+        }
+        nav a:hover { 
+            text-decoration: underline; 
+        }
+        .content { 
+            padding: 40px; 
+            max-width: 800px; 
+            margin: auto; 
+            z-index: 1; 
+            position: relative;
+        }
+        iframe { 
+            width: 100%; 
+            height: 450px; 
+            border-radius: 10px; 
+        }
+        .button { 
+            display: inline-block; 
+            background: #ffcc00; 
+            color: #222; 
+            padding: 10px 15px; 
+            border-radius: 5px; 
+            text-decoration: none; 
+            font-weight: bold; 
+        }
+        .button:hover { 
+            background: #ffaa00; 
+        }
+        .image-gallery { 
+            display: flex; 
+            justify-content: center; 
+            gap: 10px; 
+            margin-top: 20px; 
+        }
+        .image-gallery img { 
+            width: 30%; 
+            border-radius: 10px; 
+        }
+
+        /* Hall of Champions */
+        .champion { 
+            font-size: 24px; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            color: #ffcc00; 
+        }
+
+        /* Dark Mode */
+        .dark-mode { 
+            background: #eee; 
+            color: #222; 
+        }
+        .dark-mode nav { 
+            background: #ddd; 
+        }
+        .dark-mode .champion { 
+            color: #222; 
+        }
+
+        /* Dark Mode Toggle */
+        .toggle-container { 
+            position: fixed; 
+            top: 15px; 
+            right: 20px; 
+        }
+        .toggle-button { 
+            background: #ffcc00; 
+            border: none; 
+            padding: 10px; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            cursor: pointer; 
+        }
+        .dark-mode .toggle-button { 
+            background: #444; 
+            color: white; 
+        }
+
+        /* Video Background */
+        .video-background {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.2;
+        }
+
+        /* Audio Controls */
+        .audio-controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Video -->
+    <video autoplay muted loop class="video-background">
+        <source src="videos/background.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Background Music -->
+    <audio id="bgMusic" loop>
+        <source src="music/background.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Play Button -->
+    <div class="audio-controls">
+        <button onclick="toggleAudio()">Play/Pause Background Music</button>
+    </div>
+
+    <div class="toggle-container">
+        <button class="toggle-button" onclick="toggleDarkMode()">🌙 Dark Mode</button>
+    </div>
+
+    <nav>
+        <a href="#episodes">Episodes</a>
+        <a href="#next-event">Next Event</a>
+        <a href="#hall-of-champions">Hall of Champions</a>
+        <a href="#rulebook">Rulebook</a>
+        <a href="#about-us">About Us</a>
+    </nav>
+    
+    <div id="episodes" class="content">
+        <h2>Episodes</h2>
+        <p>Currently, only Episode #2 is available for embedding. Watch more on our YouTube channel below.</p>
+        <iframe src="https://www.youtube.com/embed/VXX2PCTD-Lk" allowfullscreen></iframe>
+        <br><br>
+        <a href="https://www.youtube.com/channel/UCxKKvo2IUuqYSaYUJ4l-QrQ" class="button" target="_blank">Visit Our YouTube Channel</a>
+        <div class="image-gallery">
+            <img src="images/image2.png" alt="SWMG Image 1">
+            <img src="images/image5.png" alt="SWMG Image 2">
+            <img src="images/image6.png" alt="SWMG Image 3">
+        </div>
+    </div>
+
+    <div id="next-event" class="content">
+        <h2>Next Event</h2>
+        <p>Currently, there are no scheduled tournaments. Stay tuned for updates!</p>
+    </div>
+
+    <div id="hall-of-champions" class="content">
+        <h2>🏆 Hall of Champions</h2>
+        <p class="champion">Blader Oxy is the current champion.</p>
+    </div>
+
+    <div id="rulebook" class="content">
+        <h2>📚 Rulebook</h2>
+        <p>You can download or view the official rulebook below:</p>
+        <a href="rulebook/SWMG_BEY_RULE_BOOKv1.pdf" class="button" target="_blank">Download Rulebook (PDF)</a>
+    </div>
+
+    <div id="about-us" class="content">
+        <h2>About Us</h2>
+        <p>Hello! This is the webpage for the Shadow Wizard Money Gang. Currently, it is only dedicated to hosting our Beyblade content. However, we do much more and eventually more will be added.</p>
+        <iframe src="https://www.youtube.com/embed/NVtmjybC9YQ" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        function toggleAudio() {
+            var audio = document.getElementById('bgMusic');
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let button = document.querySelector(".toggle-button");
+            if (document.body.classList.contains("dark-mode")) {
+                button.textContent = "☀️ Light Mode";
+            } else {
+                button.textContent = "🌙 Dark Mode";
+            }
+        }
+    </script>
+</body>
+</html>
